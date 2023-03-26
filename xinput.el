@@ -11,14 +11,21 @@
           "[[:space:]](\\([[:digit:]]+\\))"))
 
 (defun xinput-find-match-data (regexp &rest commands)
+  "Invoke 'xinput' with ARGS.
+
+Return a list of substrings of the output that match REGEXP."
   (with-temp-buffer
     (apply #'call-process "xinput" nil t nil commands)
     (beginning-of-buffer)
     (re-search-forward regexp)
-    (mapcar (lambda (pair) (apply #'buffer-substring-no-properties pair))
-            (seq-partition (butlast (match-data 'integers)) 2))))
+    (mapcar (lambda (pair)
+              (apply #'buffer-substring-no-properties pair))
+            (seq-partition
+             (butlast (match-data 'integers))
+             2))))
 
 (defun xinput-set-touchpad-speed (speed)
+  "Set the touchpad speed to the given SPEED parameter."
   (let* ((device-id
           (nth 1 (xinput-find-match-data *touchpad-id-regexp* "list")))
          (device-property
