@@ -1,5 +1,8 @@
 ;; -*- lexical-binding: t -*-
 
+;; Needed for 'seq-partition' in batch mode
+(require 'seq)
+
 (defvar *touchpad-id-regexp*
   (format "%s%s"
           "SynPS/2 Synaptics TouchPad"
