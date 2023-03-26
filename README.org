@@ -1,0 +1,8 @@
+* Introduction
+This is in effect a script that parses the output of ~xinput~ to
+
+1. Find certain parameters needed to set the touchpad speed.
+2  Set the touchpad speed with those parameters.
+
+Since these parameters change with every desktop login, the output of
+~xinput~ must be parsed each time, hence this script.
