@@ -21,6 +21,8 @@ Return a list of substrings of the output that match REGEXP."
     (apply #'call-process "xinput" nil t nil commands)
     (beginning-of-buffer)
     (re-search-forward regexp)
+
+    ;; An easy way to get actual substrings from raw match data
     (mapcar (lambda (pair)
               (apply #'buffer-substring-no-properties pair))
             (seq-partition
